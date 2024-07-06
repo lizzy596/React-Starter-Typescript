@@ -1,0 +1,9 @@
+{
+  "googleClientId": "708047754508-nrhsdfclpcee143mdp8jll6kvnv5b8l8.apps.googleusercontent.com ",
+  "apiUrl": "/v1",
+  "withApiServer": true,
+  "apiServerUrlProduction": "https://liftx.moontower.online",
+  "apiServerUrlDevelopment": "http://localhost:4000/v1",
+  "env": "dev",
+  "homeUrl": "/start"
+}
