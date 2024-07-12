@@ -16,7 +16,7 @@ interface AuthFormProps {
 
 
 const loginInputs = {email: '', password: ''};
-const registerInputs = {firstName: '', lastName: '', email: '', password: ''};
+const registerInputs = {name: '', email: '', password: ''};
 
 const AuthForm: React.FC<AuthFormProps> = ({status}) => {
   const navigate = useNavigate();
@@ -26,9 +26,14 @@ const AuthForm: React.FC<AuthFormProps> = ({status}) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validate()) {
-     
+     try {
       const response = status ? await authService.register(values) : await authService.login(values)
       navigate("/start");
+
+     } catch (err) {
+      console.error('error', err);
+     }
+
     }
   };
 
@@ -36,20 +41,12 @@ const AuthForm: React.FC<AuthFormProps> = ({status}) => {
     <Form onSubmit={handleSubmit} title={status ? "Register" : "Login"} className="max-w-md mx-auto p-12 bg-gray-200">
         {status && 
         <FormInput
-        label="First Name"
-        name="firstName"
-        value={values.firstName}
+        label="Name"
+        name="name"
+        value={values.name}
         onChange={handleChange}
         type="text"
-        error={errors.firstName}
-      />}
-      {status &&  <FormInput
-        label="Last Name"
-        name="lastName"
-        value={values.lastName}
-        onChange={handleChange}
-        type="text"
-        error={errors.lastName}
+        error={errors.name}
       />}
       <FormInput
         label="Email"

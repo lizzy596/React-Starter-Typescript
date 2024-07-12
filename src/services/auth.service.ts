@@ -14,18 +14,20 @@ export const authService = {
   refreshToken,
   login,
   useUserAuth,
+  verifyEmail,
   user: userSubject.asObservable(),
   get userValue() {
     return userSubject.value;
   }
 };
 
-export function register({ firstName, lastName, email, password }: { firstName: string; lastName: string; email: string; password: string }) {
-  return httpCaller.post('/auth/register', { firstName, lastName, email, password });
+export function register({ name, email, password }: { name: string; email: string; password: string }) {
+  return httpCaller.post('/auth/register', { name, email, password });
 }
 
 export async function login({ email, password }: { email: string; password: string }) {
   const response = await httpCaller.post('/auth/login', { email, password });
+  console.log('response', response)
   const { user, tokens } = response.data;
   const { token, expiration } = tokens.accessToken;
   userSubject.next({ ...user, token });
@@ -97,6 +99,17 @@ export function logout() {
     })
     .catch(() => {
       redirect('/');
+    });
+}
+
+export async function verifyEmail(token: string) {
+ return  httpCaller
+    .post(`/auth/verify-email`, {token})
+    .then((response) => {
+      return response.data;
+    })
+    .catch(() => {
+      redirect('/error');
     });
 }
 

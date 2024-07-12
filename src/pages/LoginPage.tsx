@@ -6,7 +6,7 @@ const LoginPage: React.FC = () => {
   const location = useLocation();
   const state = location.state as { status: string } | undefined;
   return (
-    <div className="flex items-start justify-center min-h-screen bg-gray-50 pt-20">
+    <div className="flex items-start justify-center min-h-screen bg-neutral-300 pt-20">
       <AuthForm status={state} />
     </div>
   );
