@@ -2,6 +2,8 @@ import { Navigate } from 'react-router-dom';
 import DefaultLayout from '../layouts/Default.layout';
 import StartPage from '../pages/StartPage';
 import LoginPage from '../pages/LoginPage';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
 import ErrorPage from '../pages/ErrorPage';
 import EmailVerificationPage from '../pages/EmailVerificationPage';
 
@@ -19,6 +21,24 @@ const publicRoutes = [
     exact: true,
     layout: DefaultLayout,
     element: LoginPage,
+  },
+  {
+    path: '/start',
+    exact: true,
+    layout: DefaultLayout,
+    element: StartPage,
+  },
+  {
+    path: '/forgot-password',
+    exact: true,
+    layout: DefaultLayout,
+    element: ForgotPasswordPage,
+  },
+  {
+    path: '/reset-password',
+    exact: true,
+    layout: DefaultLayout,
+    element: ResetPasswordPage,
   },
   {
     path: '/start',

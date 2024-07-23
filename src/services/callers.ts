@@ -20,7 +20,15 @@ export const httpCaller = axios.create({
   withCredentials: true,
 });
 
+httpCaller.interceptors.response.use(
+  response => response,
+  error=> {
+    if(error.response.status >= 400 && error.response.status < 500) {
+      console.log('ERROR IN INTERCEPTOR', error)
 
+    }
+  }
+)
 
 // const createAuthHeader = (config) => {
 //   const { token } = authService.userValue;
@@ -39,4 +47,14 @@ export const httpCaller = axios.create({
 
 
 export const authCaller = axios.create(authConfig);
+
+authCaller.interceptors.response.use(
+  response => response,
+  error=> {
+    if(error.response.status >= 400 && error.response.status < 500) {
+      console.log('ERROR IN INTERCEPTOR', error)
+
+    }
+  }
+)
 

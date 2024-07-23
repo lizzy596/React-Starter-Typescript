@@ -15,6 +15,8 @@ export const authService = {
   login,
   useUserAuth,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
   user: userSubject.asObservable(),
   get userValue() {
     return userSubject.value;
@@ -27,7 +29,6 @@ export function register({ name, email, password }: { name: string; email: strin
 
 export async function login({ email, password }: { email: string; password: string }) {
   const response = await httpCaller.post('/auth/login', { email, password });
-  console.log('response', response)
   const { user, tokens } = response.data;
   const { token, expiration } = tokens.accessToken;
   userSubject.next({ ...user, token });
@@ -111,6 +112,18 @@ export async function verifyEmail(token: string) {
     .catch(() => {
       redirect('/error');
     });
+}
+
+
+export async function forgotPassword(email: string) {
+  return  httpCaller.post(`/auth/forgot-password`, {email})
+
+}
+
+export async function resetPassword(token: string, newPassword: string ) {
+  console.log('in service.resetPassword', token, newPassword);
+ httpCaller.post(`/auth/reset-password`, {token, newPassword})
+
 }
 
 export default authService;

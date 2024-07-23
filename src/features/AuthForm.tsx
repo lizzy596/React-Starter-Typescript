@@ -37,7 +37,14 @@ const AuthForm: React.FC<AuthFormProps> = ({status}) => {
     }
   };
 
+
+  const forgotPassword = () => {
+    console.log('hasofhodfahoafd')
+    navigate("/forgot-password");
+  }
+
   return (
+    <>
     <Form onSubmit={handleSubmit} title={status ? "Register" : "Login"} className="max-w-md mx-auto p-12 bg-gray-200">
         {status && 
         <FormInput
@@ -73,15 +80,22 @@ const AuthForm: React.FC<AuthFormProps> = ({status}) => {
         error={errors.password}
       /> */}
   
-      <div className="flex justify-center">
+      <div className="flex flex-col justify-center">
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 m-2 rounded hover:bg-blue-600 focus:outline-none"
         >
           Submit
         </button>
-      </div>
+        <button onClick={forgotPassword}>Forgot Password?</button>
+        </div>
+   
+    
     </Form>
+
+    
+    </>
+
   );
 };
 
